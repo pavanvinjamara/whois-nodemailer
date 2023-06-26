@@ -1,23 +1,36 @@
-const axios = require('axios');
- ( async() => {
-const options = {
-  method: 'GET',
-  url: 'https://zozor54-whois-lookup-v1.p.rapidapi.com/',
-  params: {
-    domain: 'sendrank.com',
-    format: 'json',
-    _forceRefresh: '0'
-  },
-  headers: {
-    'X-RapidAPI-Key': '8786114865msha4a1b52488116a1p1a1863jsn0e7f79b0fe2d',
-    'X-RapidAPI-Host': 'zozor54-whois-lookup-v1.p.rapidapi.com'
-  }
-};
+const whoiser = require('whoiser');
 
-try {
-	const response = await axios.request(options);
-	console.log(response.data.register);
-} catch (error) {
-	console.error(error);
-}
- })();
+( async() => {
+
+let domaininfo = whoiser.allTlds;
+
+let domaininfo2 = await whoiser.domain('blog.google.com',{host: 'whois.nic.google',follow: 1});
+
+console.log(whoiser.allTlds().then( async data=>{
+
+data.forEach(async domain =>{
+
+let domainMetaData = await whoiser(domain);
+
+// if(new Date(domainMetaData.created) > new Date('2023-06-20'))
+
+// console.log(domainMetaData);
+console.log(domainMetaData.created);
+
+// console.log(domainMetaData.contacts.administrative.name);
+// console.log(domainMetaData.contacts.administrative.organisation);
+// console.log(domainMetaData.contacts.administrative['e-mail']);
+// console.log(domainMetaData.contacts.administrative.phone);
+// console.log("===========================")
+
+})
+
+}));
+
+console.log('======================');
+
+console.log('======================');
+
+console.log(domaininfo2);
+
+})();
