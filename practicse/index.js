@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const app = express();
 
 //send email after 1 minute
-cron.schedule("1 * * * *", function () {
+cron.schedule("*/15 * * * * *", function () {
   mailService();
 });
 
